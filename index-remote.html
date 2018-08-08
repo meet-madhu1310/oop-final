@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Imagly</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCRg5GxBypzL60otAlK1Og7_9qVu9S0Wzs",
+      authDomain: "oop-final-8af24.firebaseapp.com",
+      databaseURL: "https://oop-final-8af24.firebaseio.com",
+      projectId: "oop-final-8af24",
+      storageBucket: "oop-final-8af24.appspot.com",
+      messagingSenderId: "613065070613"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <script>
+
+    $(function() {
+
+      $('#img-url').focus();
+
+      let ref = firebase.database().ref('/images');
+
+      $('form').submit(function(event) {
+        event.preventDefault();
+
+        //GET VALUE FROM INPUT TEXT
+        let sourceVal = $('#img-url').val();
+        let captionVal = $('#img-caption').val();
+
+        //AFTER GETTING VALUE SET TO CLEAR THE FIELD
+        $('#img-url').val('');
+        $('#img-caption').val('');
+
+        //PUSH DATA TO THE FIREBASE TABLE
+        ref.push({caption: captionVal, url: sourceVal});
+      });
+
+      //ADDING AND RETRIEVING DATA FROM FIREBASE TABLE
+      ref.on('child_added', function(data) {
+        let imgId = data.key;
+        let imgObj = data.val();
+
+        let urlVal = imgObj.url;
+        let capVal = imgObj.caption;
+
+        let decorator = `
+          <article id=${imgId}>
+            <img src=${urlVal} alt="Image" />
+            <p>${capVal}</p>
+            <button>Delete</button>
+          </article>
+        `;
+
+        $('.images-section').prepend(decorator);
+
+        $('#img-url').focus();
+
+        //TO DELETE IMAGE FROM FIREBASE
+        $('button').unbind().click(function(event) {
+          $(this).parent().fadeOut(function() {
+            let btnId = $(this).attr('id');
+
+            firebase.database().ref(`images/${btnId}`).remove();
+
+            $('#img-url').focus();
+          });
+        });
+      });
+
+    });
+
+  </script>
+
+</head>
+<body>
+
+  <header>
+
+    <img src="logo.png" alt="Logo">
+    <h1>Imagly</h1>
+
+  </header>
+
+  <main>
+
+    <div class="container">
+
+      <form>
+
+        <div class="img-upload">
+          <label for="">Image URL:</label>
+          <input type="url" id="img-url">
+        </div>
+
+        <div class="img-cap">
+          <label for="">Caption:</label>
+          <textarea id="img-caption" cols="30" rows="0"></textarea>
+        </div>
+
+        <div class="button">
+          <input type="submit" value="Submit" id="btn-submit">
+        </div>
+
+      </form>
+
+      <div class="images-section">
+
+        <!-- <article>
+          ADD IMAGES HERE
+        </article> -->
+
+      </div>
+
+    </div>
+
+    <div class="news">
+
+      <h2>News</h2>
+
+      <ul class="news-list">
+        <li>I have an exam today!</li>
+        <li>I love JavaScript!</li>
+        <li>I made my first application!</li>
+        <li>I wanna buy iMac Pro.</li>
+        <li>BMW launched new car last week.</li>
+      </ul>
+
+    </div>
+
+  </main>
+
+</body>
+</html>

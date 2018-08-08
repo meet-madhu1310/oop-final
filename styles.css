@@ -1,0 +1,180 @@
+body{
+  font-family: helvetica, sans-serif, georgia;
+}
+
+header{
+  padding-left: 10%;
+  padding-top: 20px;
+  border-bottom: 5px solid #000;
+}
+
+header img{
+  width: 150px;
+  height: 150px;
+
+  object-fit: cover;
+}
+
+header h1{
+  margin: 0;
+  padding: 0;
+
+  font-size: 3rem;
+  color: cornflowerblue;
+}
+
+main{
+  max-width: 1250px;
+  margin: auto;
+
+  margin-top: 2rem;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 250px 1fr;
+}
+
+.container{
+  border-left: 5px solid #000;
+  border-right: 5px solid #000;
+
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+form{
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  height: 200px;
+  align-items: flex-start;
+}
+
+.news{
+  grid-column: 2 / 3;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  border-right: 5px solid #000;
+}
+
+form .img-upload, form .img-cap{
+  margin: 20px 0;
+}
+
+form input[type="url"]{
+  margin-left: 20px;
+  width: 300px;
+  padding: 10px;
+
+  border-radius: 5px;
+}
+
+form label{
+  margin: 0;
+  padding: 0;
+
+  font-size: 1.5rem;
+  text-align: right;
+}
+
+form textarea{
+  margin-left: 58px;
+  width: 320px;
+
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
+form .button{
+  padding-bottom: 10px;
+  border-bottom: 5px solid #000;
+}
+
+input[type="submit"]{
+  font-size: 5rem;
+  padding: 20px !important;
+
+  margin-left: 150px;
+  cursor: pointer;
+}
+
+/*END OF FORM SECTION*/
+
+/*IMAGES SECTION START*/
+.images-section{
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  min-height: 50vh;
+
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+}
+
+article{
+  flex-basis: 235px !important;
+  margin: 10px 10px;
+  min-height: 350px;
+  max-height: 400px;
+
+  background-color: #eee;
+}
+
+button{
+  text-align: center;
+  margin-left: 32%;
+  margin-bottom: 10px;
+
+  padding: 10px;
+  font-size: 1.5rem;
+
+  background-color: #000;
+  color: #ddd;
+
+  transition: 1s;
+  cursor: pointer;
+
+  border-radius: 10px;
+}
+
+button:hover{
+  background-color: #ddd ;
+  color: #000 !important;
+}
+
+p{
+  text-align: center;
+}
+
+img{
+  width: 235px;
+  height: 250px;
+
+  padding: 10px;
+  box-sizing: border-box;
+
+  object-fit: cover;
+}
+
+.news h2{
+  font-size: 2rem;
+}
+
+.news ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news li{
+  margin: 10px 0;
+  padding: 20px;
+  font-size: 1rem;
+
+  border: 2px solid black;
+  border-radius: 10px;
+}
